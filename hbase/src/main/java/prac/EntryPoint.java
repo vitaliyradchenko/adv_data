@@ -90,5 +90,12 @@ public class EntryPoint {
         manager.close();
         factory.close();
 
+        CustomTest test = new CustomTest();
+        try {
+            test.runSuite();
+        } catch (IOException ex) {
+
+        }
+
     }
 }

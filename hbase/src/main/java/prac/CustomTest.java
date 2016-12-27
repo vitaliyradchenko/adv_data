@@ -21,24 +21,16 @@ public class CustomTest extends BaseTest{
         EntityManager em = emf.createEntityManager();
 
         Query findQuery = em.createQuery("select p from Physician p");
-        List<prac.Physician> allPhysicians = findQuery.getResultList();
+        List<Physician> allPhysicians = findQuery.getResultList();
         Assert.assertNotEquals(0, allPhysicians.size());
 
-        Query findQuery2 = em.createQuery("select p from Patient p where p.firstName = \'Patient1\'");
-        List<prac.Patient> Patients = findQuery2.getResultList();
-        Assert.assertEquals(1, Patients.size());
+        Query findQuery2 = em.createQuery("select p from Patient p where p.firstName = John");
+        List<Patient> allJohns = findQuery2.getResultList();
+        Assert.assertNotEquals(0, allJohns.size());
 
-        Query findQuery3 = em.createQuery("select mr from MedicalRecord mr where mr.type = \'type2\'");
-        List<prac.MedicalRecord> allRecords = findQuery3.getResultList();
-        Assert.assertEquals(3, allRecords.size());
-    }
+        Query findQuery3 = em.createQuery("select mr from MedicalRecord mr where mr.type = non_existent_type");
+        List<MedicalRecord> allRecords = findQuery3.getResultList();
+        Assert.assertEquals(0, allRecords.size());
 
-    public static void main(String[] args) {
-        CustomTest test = new CustomTest();
-        try {
-            test.runSuite();
-        } catch (IOException ex) {
-
-        }
     }
 }
